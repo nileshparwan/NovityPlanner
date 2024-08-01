@@ -14,7 +14,7 @@ export const Header: React.FC<IHeader> = ({ isLogged }) => {
   const mobileMenuHandler = useCallback(() => setIsOpen((prev) => !prev), []);
 
   return (
-    <header className='shadow-md w-full'>
+    <header className='bg-gray-50 dark:bg-gray-900 shadow-md w-full'>
       <div className='desktop-menu flex h-16 items-center justify-between px-4 md:gap-8'>
         <Link href='/' className='block'>
           <span className='sr-only'>Home</span>
