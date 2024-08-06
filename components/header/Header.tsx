@@ -1,22 +1,27 @@
-'use client'
+'use client';
+
 import Link from 'next/link';
 import type React from 'react';
-import { Search, Bell } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { Search, Bell, Loader } from 'lucide-react';
+import { type ReactNode, useCallback, useState } from 'react';
 import { Button, buttonVariants } from '../ui/button';
 import Nav from './Nav';
 
 interface IHeader {
   isLogged: boolean;
+  userButtonComponent: ReactNode;
 }
 
-export const Header: React.FC<IHeader> = ({ isLogged }) => {
+export const Header: React.FC<IHeader> = ({
+  isLogged,
+  userButtonComponent
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const mobileMenuHandler = useCallback(() => setIsOpen((prev) => !prev), []);
 
   return (
-    <header className='bg-gray-50 dark:bg-gray-900 shadow-md w-full'>
-      <div className='desktop-menu flex h-16 items-center justify-between px-4 md:gap-8'>
+    <header className='bg-gray-50 dark:bg-gray-900 shadow-md w-full px-4'>
+      <div className='flex h-16 items-center justify-between md:gap-8'>
         <Link href='/' className='block'>
           <span className='sr-only'>Home</span>
           <svg
@@ -37,7 +42,9 @@ export const Header: React.FC<IHeader> = ({ isLogged }) => {
           <Nav className='flex items-center gap-6 text-sm' />
         </div>
 
-        <div className='flex space-x-4 items-center'>
+        <div className='flex gap-3 md:gap-6 items-center'>
+          <div>{userButtonComponent && userButtonComponent}</div>
+
           <Button
             className='block rounded-md p-2.5 md:hidden'
             aria-expanded={isOpen}
@@ -60,6 +67,7 @@ export const Header: React.FC<IHeader> = ({ isLogged }) => {
               />
             </svg>
           </Button>
+
           <div className='hidden md:flex space-x-2'>
             {isLogged ? (
               <Link
@@ -70,8 +78,8 @@ export const Header: React.FC<IHeader> = ({ isLogged }) => {
               </Link>
             ) : (
               <Link
-                href='/'
-                className={`rounded-md px-5 py-2.5 text-sm font-medium ${buttonVariants({ variant: 'default' })}`}
+                href='/sign-in'
+                className={`text-sm ${buttonVariants({ variant: 'default' })}`}
               >
                 Sign in
               </Link>
@@ -95,8 +103,8 @@ export const Header: React.FC<IHeader> = ({ isLogged }) => {
             </Link>
           ) : (
             <Link
-              href='/'
-              className={`rounded-md ${buttonVariants({ variant: 'link' })}`}
+              href='/sign-in'
+              className={`text-sm ${buttonVariants({ variant: 'link' })}`}
             >
               Sign in
             </Link>
