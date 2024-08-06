@@ -9,7 +9,7 @@ import Nav from './Nav';
 
 interface IHeader {
   isLogged: boolean;
-  userButtonComponent: ReactNode;
+  userButtonComponent?: ReactNode;
 }
 
 export const Header: React.FC<IHeader> = ({
