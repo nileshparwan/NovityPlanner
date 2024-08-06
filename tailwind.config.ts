@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       screens: {
-        md: '853px'
+        md: '920px'
       },
       colors: {
         border: "hsl(var(--border))",
